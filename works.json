@@ -1,0 +1,18 @@
+{
+    "works": [
+        {
+            "title": "ผลงานชิ้นที่ 1",
+            "description": "รายละเอียดของผลงานชิ้นที่ 1",
+            "link": "https://example.com/work1"
+        },
+        {
+            "title": "ผลงานชิ้นที่ 2",
+            "description": "รายละเอียดของผลงานชิ้นที่ 2",
+            "link": "https://example.com/work2"
+        },
+        {
+            "title": "ผลงานชิ้นที่ 3",
+            "description": "รายละเอียดของผลงานชิ้นที่ 3"
+        }
+    ]
+}

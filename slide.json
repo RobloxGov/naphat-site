@@ -1,0 +1,19 @@
+{
+    "slides": [
+        {
+            "image": "slide1.jpg",
+            "title": "ยินดีต้อนรับสู่ NaphatSite",
+            "description": "เว็บไซต์ส่วนตัวของ ณภัทร ปัญโญ"
+        },
+        {
+            "image": "slide2.jpg",
+            "title": "ประวัติส่วนตัว",
+            "description": "เรียนรู้เกี่ยวกับฉันมากขึ้น"
+        },
+        {
+            "image": "slide3.jpg",
+            "title": "ผลงานและความสำเร็จ",
+            "description": "ผลงานที่ฉันภูมิใจ"
+        }
+    ]
+}

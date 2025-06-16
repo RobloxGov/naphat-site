@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NaphatSite - ณภัทร ปัญโญ</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>NaphatSite - เว็บไซต์ส่วนตัวของณภัทร</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #fa0000;
@@ -13,462 +13,1132 @@
             --secondary-color2: #ffbf00;
             --white: #ffffff;
             --black: #000000;
+            --gray-light: #f5f5f5;
+            --gray-dark: #333333;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Kanit", sans-serif;
         }
-        
+
         body {
             background-color: var(--white);
             color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        
+
+        /* Header Styles */
         header {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color1));
             color: var(--white);
-            padding: 1rem 2rem;
-            position: sticky;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
-        
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(250, 0, 0, 0.95);
+        }
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
-        
+
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            display: flex;
+            align-items: center;
         }
-        
+
+        .logo span {
+            color: var(--secondary-color2);
+            margin-left: 0.5rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
         }
-        
+
         nav ul li {
             margin-left: 1.5rem;
+            position: relative;
         }
-        
+
         nav ul li a {
             color: var(--white);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 1.1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
         }
-        
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color2);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
         nav ul li a:hover {
             color: var(--secondary-color2);
         }
-        
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
         }
-        
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary-color1);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: 0;
+            left: 25%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color2));
+            border-radius: 2px;
+        }
+
+        /* Slider Section */
         .slider-container {
             position: relative;
             width: 100%;
-            height: 400px;
+            height: 500px;
             overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         .slider {
             display: flex;
-            width: 100%;
-            height: 100%;
             transition: transform 0.5s ease;
+            height: 100%;
         }
-        
+
         .slide {
             min-width: 100%;
             height: 100%;
             position: relative;
         }
-        
+
         .slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
-        .slide-caption {
+
+        .slide-content {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
             color: var(--white);
-            padding: 1rem;
-            text-align: center;
+            padding: 2rem;
         }
-        
+
+        .slide-content h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
         .slider-nav {
             position: absolute;
             top: 50%;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            transform: translateY(-50%);
             padding: 0 1rem;
+            transform: translateY(-50%);
+            z-index: 10;
         }
-        
+
         .slider-nav button {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.3);
+            color: var(--white);
             border: none;
             width: 40px;
             height: 40px;
             border-radius: 50%;
             cursor: pointer;
             font-size: 1.2rem;
-            color: var(--primary-color);
-            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
         }
-        
+
         .slider-nav button:hover {
-            background: var(--white);
+            background: var(--primary-color);
+            transform: scale(1.1);
         }
-        
-        .section-title {
-            text-align: center;
-            margin: 2rem 0;
-            color: var(--secondary-color1);
-            font-size: 2rem;
-            position: relative;
+
+        .slider-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
         }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
             background: var(--secondary-color2);
-            margin: 0.5rem auto;
+            transform: scale(1.2);
         }
-        
+
+        /* Gallery Section */
         .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            background-color: var(--gray-light);
         }
-        
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
         .gallery-item {
             background: var(--white);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        
+
         .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-item-content h3 {
+            color: var(--secondary-color1);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .gallery-item-content p {
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-item-content .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item-content .btn:hover {
+            background: var(--secondary-color1);
+            transform: translateY(-2px);
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .load-more-btn {
+            background: var(--secondary-color1);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(25, 48, 138, 0.3);
+        }
+
+        .load-more-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(250, 0, 0, 0.3);
+        }
+
+        /* Works Section */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .work-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .work-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
-        
-        .gallery-item img {
+
+        .work-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
-        
-        .gallery-item-content {
-            padding: 1rem;
-        }
-        
-        .gallery-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .load-more {
-            display: block;
-            margin: 2rem auto;
-            padding: 0.8rem 2rem;
-            background: var(--secondary-color1);
-            color: var(--white);
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-        
-        .load-more:hover {
-            background: var(--primary-color);
-        }
-        
-        .works-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-        
-        .work-item {
-            background: var(--white);
-            border-radius: 8px;
+
+        .work-card-content {
             padding: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-left: 4px solid var(--secondary-color2);
         }
-        
-        .work-item h3 {
+
+        .work-card-content h3 {
             color: var(--secondary-color1);
             margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
-        
+
+        .work-card-content .work-category {
+            display: inline-block;
+            background: var(--secondary-color2);
+            color: var(--black);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .work-card-content p {
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+        }
+
+        .work-card-content .work-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .work-card-content .work-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .work-card-content .work-link:hover {
+            color: var(--secondary-color1);
+        }
+
+        .work-card-content .work-link:hover i {
+            transform: translateX(3px);
+        }
+
+        /* Footer */
         footer {
-            background: var(--secondary-color1);
+            background: linear-gradient(135deg, var(--secondary-color1), var(--black));
             color: var(--white);
-            padding: 3rem 1rem;
-            text-align: center;
+            padding: 3rem 0 1.5rem;
         }
-        
+
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
-        
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: var(--secondary-color2);
+        }
+
+        .footer-col p {
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
         .social-links {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            gap: 1rem;
+            margin-top: 1rem;
         }
-        
+
         .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
             color: var(--white);
-            font-size: 1.5rem;
-            transition: color 0.3s;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
         }
-        
+
         .social-links a:hover {
+            background: var(--secondary-color2);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
             color: var(--secondary-color2);
+            transform: translateX(5px);
         }
-        
-        .copyright {
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
             opacity: 0.8;
+            font-size: 0.9rem;
         }
-        
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(250, 0, 0, 0.3);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary-color1);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .slider-container {
+                height: 400px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
             .header-container {
-                flex-direction: column;
+                padding: 0 1rem;
             }
-            
+
+            .hamburger {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: var(--primary-color);
+                transition: all 0.5s ease;
+                z-index: 999;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            nav.active {
+                left: 0;
+            }
+
             nav ul {
-                margin-top: 1rem;
+                flex-direction: column;
+                padding: 2rem;
             }
-            
+
             nav ul li {
-                margin-left: 1rem;
-                margin-right: 1rem;
+                margin: 1rem 0;
+            }
+
+            .slider-container {
+                height: 350px;
+            }
+
+            .slide-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .slide-content p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
             }
         }
-        
-        @media (max-width: 480px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            
+
+        @media (max-width: 576px) {
             .slider-container {
                 height: 300px;
             }
+
+            .slide-content {
+                padding: 1rem;
+            }
+
+            .slide-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .slide-content p {
+                font-size: 0.9rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-col h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
         }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header id="header">
         <div class="header-container">
-            <div class="logo">NaphatSite</div>
-            <nav>
+            <a href="#" class="logo">Naphat<span>Site</span></a>
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="nav">
                 <ul>
-                    <li><a href="#home">หน้าหลัก</a></li>
+                    <li><a href="#home">หน้าแรก</a></li>
                     <li><a href="#gallery">ภาพของณภัทร</a></li>
                     <li><a href="#works">ผลงาน</a></li>
+                    <li><a href="#about">เกี่ยวกับ</a></li>
                     <li><a href="#contact">ติดต่อ</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    
+
+    <!-- Main Content -->
     <main>
-        <section id="home">
+        <!-- Home Section with Slider -->
+        <section class="section" id="home">
             <div class="slider-container">
                 <div class="slider" id="slider">
-                    <!-- Slides will be loaded from slide.json -->
+                    <!-- Slides will be loaded from slide.json via JavaScript -->
                 </div>
                 <div class="slider-nav">
-                    <button id="prev-slide">&lt;</button>
-                    <button id="next-slide">&gt;</button>
+                    <button id="prev-slide"><i class="fas fa-chevron-left"></i></button>
+                    <button id="next-slide"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="slider-dots" id="slider-dots">
+                    <!-- Dots will be added via JavaScript -->
                 </div>
             </div>
         </section>
-        
-        <section id="gallery">
-            <h2 class="section-title">ภาพของณภัทร</h2>
-            <div class="gallery" id="gallery-container">
-                <!-- Gallery items will be loaded from img.json -->
+
+        <!-- Gallery Section -->
+        <section class="section gallery" id="gallery">
+            <div class="section-title">
+                <h2>ภาพของณภัทร</h2>
             </div>
-            <button class="load-more" id="load-more">ดูเพิ่มเติม</button>
+            <div class="gallery-container" id="gallery-container">
+                <!-- Gallery items will be loaded from img.json via JavaScript -->
+            </div>
+            <div class="load-more">
+                <button class="load-more-btn" id="load-more">ดูเพิ่มเติม</button>
+            </div>
         </section>
-        
-        <section id="works">
-            <h2 class="section-title">ผลงาน</h2>
-            <div class="works-container" id="works-container">
-                <!-- Works will be loaded from works.json -->
+
+        <!-- Works Section -->
+        <section class="section" id="works">
+            <div class="section-title">
+                <h2>ผลงานของฉัน</h2>
+            </div>
+            <div class="works-grid" id="works-grid">
+                <!-- Works will be loaded from works.json via JavaScript -->
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section" id="about">
+            <div class="section-title">
+                <h2>เกี่ยวกับฉัน</h2>
+            </div>
+            <div class="about-content fade-in">
+                <p>นี่คือส่วนเกี่ยวกับฉันที่ฉันจะเขียนเกี่ยวกับตัวเองและสิ่งที่ฉันทำ</p>
+                <!-- More content can be added here -->
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <div class="section-title">
+                <h2>ติดต่อฉัน</h2>
+            </div>
+            <div class="contact-content fade-in delay-1">
+                <p>คุณสามารถติดต่อฉันผ่านช่องทางต่างๆ ที่ระบุไว้ด้านล่าง</p>
+                <!-- Contact form or information can be added here -->
             </div>
         </section>
     </main>
-    
-    <footer id="contact">
+
+    <!-- Footer -->
+    <footer>
         <div class="footer-container">
-            <h2>ณภัทร ปัญโญ (Mr.Naphat Panyo)</h2>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <div class="footer-col">
+                <h3>NaphatSite</h3>
+                <p>เว็บไซต์ส่วนตัวของณภัทร ที่รวบรวมผลงานและเรื่องราวต่างๆ ของฉัน</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
             </div>
-            <div class="copyright">
-                &copy; 2025 NaphatSite. All Rights Reserved.
+            <div class="footer-col">
+                <h3>ลิงก์ด่วน</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">หน้าแรก</a></li>
+                    <li><a href="#gallery">ภาพของณภัทร</a></li>
+                    <li><a href="#works">ผลงาน</a></li>
+                    <li><a href="#about">เกี่ยวกับ</a></li>
+                    <li><a href="#contact">ติดต่อ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>ข้อมูลติดต่อ</h3>
+                <p><i class="fas fa-envelope"></i> email@example.com</p>
+                <p><i class="fas fa-phone"></i> +66 123 456 789</p>
+                <p><i class="fas fa-map-marker-alt"></i> ที่อยู่ของฉัน, ประเทศไทย</p>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 NaphatSite. สงวนลิขสิทธิ์ทุกประการ.</p>
+        </div>
     </footer>
-    
-    <!-- Font Awesome for social icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
     <script>
-        // Fetch slides from slide.json
-        fetch('slide.json')
-            .then(response => response.json())
-            .then(data => {
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.innerHTML = nav.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fetch and display slider data
+        async function fetchSlides() {
+            try {
+                // In a real scenario, you would fetch from slide.json
+                // const response = await fetch('slide.json');
+                // const slides = await response.json();
+                
+                // Mock data for demonstration
+                const slides = [
+                    {
+                        "image": "https://source.unsplash.com/random/1200x600/?nature,water",
+                        "title": "ยินดีต้อนรับสู่ NaphatSite",
+                        "description": "เว็บไซต์ส่วนตัวของฉันที่แสดงผลงานและเรื่องราวต่างๆ"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/1200x600/?city,night",
+                        "title": "ผลงานสร้างสรรค์",
+                        "description": "ชมผลงานต่างๆ ที่ฉันได้สร้างขึ้นมา"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/1200x600/?technology,computer",
+                        "title": "เกี่ยวกับฉัน",
+                        "description": "เรียนรู้เพิ่มเติมเกี่ยวกับตัวฉันและสิ่งที่ฉันทำ"
+                    }
+                ];
+
                 const slider = document.getElementById('slider');
-                data.slides.forEach(slide => {
+                const sliderDots = document.getElementById('slider-dots');
+
+                slides.forEach((slide, index) => {
+                    // Create slide
                     const slideElement = document.createElement('div');
                     slideElement.className = 'slide';
                     slideElement.innerHTML = `
                         <img src="${slide.image}" alt="${slide.title}">
-                        <div class="slide-caption">
+                        <div class="slide-content">
                             <h3>${slide.title}</h3>
                             <p>${slide.description}</p>
                         </div>
                     `;
                     slider.appendChild(slideElement);
+
+                    // Create dot
+                    const dot = document.createElement('div');
+                    dot.className = 'slider-dot';
+                    if (index === 0) dot.classList.add('active');
+                    dot.dataset.index = index;
+                    sliderDots.appendChild(dot);
                 });
-                
+
                 // Slider functionality
                 let currentSlide = 0;
-                const slides = document.querySelectorAll('.slide');
-                const totalSlides = slides.length;
-                
+                const slidesCount = slides.length;
+                const slideElements = document.querySelectorAll('.slide');
+                const dots = document.querySelectorAll('.slider-dot');
+
                 function showSlide(index) {
-                    if (index >= totalSlides) {
-                        currentSlide = 0;
-                    } else if (index < 0) {
-                        currentSlide = totalSlides - 1;
-                    } else {
-                        currentSlide = index;
-                    }
+                    slideElements.forEach(slide => {
+                        slide.style.transform = `translateX(-${index * 100}%)`;
+                    });
                     
-                    const offset = -currentSlide * 100;
-                    slider.style.transform = `translateX(${offset}%)`;
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[index].classList.add('active');
+                    
+                    currentSlide = index;
                 }
-                
+
                 document.getElementById('next-slide').addEventListener('click', () => {
-                    showSlide(currentSlide + 1);
+                    currentSlide = (currentSlide + 1) % slidesCount;
+                    showSlide(currentSlide);
                 });
-                
+
                 document.getElementById('prev-slide').addEventListener('click', () => {
-                    showSlide(currentSlide - 1);
+                    currentSlide = (currentSlide - 1 + slidesCount) % slidesCount;
+                    showSlide(currentSlide);
                 });
-                
-                // Auto slide change every 5 seconds
-                setInterval(() => {
-                    showSlide(currentSlide + 1);
+
+                // Auto slide change
+                let slideInterval = setInterval(() => {
+                    currentSlide = (currentSlide + 1) % slidesCount;
+                    showSlide(currentSlide);
                 }, 5000);
-            })
-            .catch(error => console.error('Error loading slides:', error));
-        
-        // Fetch gallery images from img.json
-        fetch('img.json')
-            .then(response => response.json())
-            .then(data => {
-                const galleryContainer = document.getElementById('gallery-container');
-                const loadMoreBtn = document.getElementById('load-more');
-                let displayedItems = 0;
-                const itemsPerLoad = 3;
+
+                // Pause on hover
+                slider.addEventListener('mouseenter', () => {
+                    clearInterval(slideInterval);
+                });
+
+                slider.addEventListener('mouseleave', () => {
+                    slideInterval = setInterval(() => {
+                        currentSlide = (currentSlide + 1) % slidesCount;
+                        showSlide(currentSlide);
+                    }, 5000);
+                });
+
+                // Dot navigation
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        showSlide(parseInt(dot.dataset.index));
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error loading slides:', error);
+            }
+        }
+
+        // Fetch and display gallery images
+        async function fetchGalleryImages() {
+            try {
+                // In a real scenario, you would fetch from img.json
+                // const response = await fetch('img.json');
+                // const images = await response.json();
                 
-                function displayItems() {
-                    const endIndex = Math.min(displayedItems + itemsPerLoad, data.images.length);
+                // Mock data for demonstration
+                const images = [
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?portrait,man",
+                        "title": "ภาพที่ 1",
+                        "description": "คำอธิบายภาพที่ 1"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?nature,mountain",
+                        "title": "ภาพที่ 2",
+                        "description": "คำอธิบายภาพที่ 2"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?city,architecture",
+                        "title": "ภาพที่ 3",
+                        "description": "คำอธิบายภาพที่ 3"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?technology,computer",
+                        "title": "ภาพที่ 4",
+                        "description": "คำอธิบายภาพที่ 4"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?art,painting",
+                        "title": "ภาพที่ 5",
+                        "description": "คำอธิบายภาพที่ 5"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?travel,beach",
+                        "title": "ภาพที่ 6",
+                        "description": "คำอธิบายภาพที่ 6"
+                    }
+                ];
+
+                const galleryContainer = document.getElementById('gallery-container');
+                let visibleItems = 3; // Initially show 3 items
+                const loadMoreBtn = document.getElementById('load-more');
+
+                function displayImages() {
+                    galleryContainer.innerHTML = ''; // Clear existing items
                     
-                    for (let i = displayedItems; i < endIndex; i++) {
-                        const item = data.images[i];
+                    images.slice(0, visibleItems).forEach(image => {
                         const galleryItem = document.createElement('div');
-                        galleryItem.className = 'gallery-item';
+                        galleryItem.className = 'gallery-item fade-in';
                         galleryItem.innerHTML = `
-                            <img src="${item.image}" alt="${item.title}">
+                            <img src="${image.image}" alt="${image.title}">
                             <div class="gallery-item-content">
-                                <h3>${item.title}</h3>
-                                <p>${item.description}</p>
+                                <h3>${image.title}</h3>
+                                <p>${image.description}</p>
+                                <a href="#" class="btn">ดูรายละเอียด</a>
                             </div>
                         `;
                         galleryContainer.appendChild(galleryItem);
-                    }
-                    
-                    displayedItems = endIndex;
-                    
-                    if (displayedItems >= data.images.length) {
+                    });
+
+                    // Hide load more button if all items are visible
+                    if (visibleItems >= images.length) {
                         loadMoreBtn.style.display = 'none';
+                    } else {
+                        loadMoreBtn.style.display = 'inline-block';
                     }
                 }
-                
-                // Initial display
-                displayItems();
-                
-                // Load more button
-                loadMoreBtn.addEventListener('click', displayItems);
-            })
-            .catch(error => console.error('Error loading gallery images:', error));
-        
-        // Fetch works from works.json
-        fetch('works.json')
-            .then(response => response.json())
-            .then(data => {
-                const worksContainer = document.getElementById('works-container');
-                
-                data.works.forEach(work => {
-                    const workItem = document.createElement('div');
-                    workItem.className = 'work-item';
-                    workItem.innerHTML = `
-                        <h3>${work.title}</h3>
-                        <p>${work.description}</p>
-                        ${work.link ? `<a href="${work.link}" target="_blank" style="color: var(--secondary-color2); margin-top: 0.5rem; display: inline-block;">ดูผลงาน</a>` : ''}
-                    `;
-                    worksContainer.appendChild(workItem);
+
+                loadMoreBtn.addEventListener('click', () => {
+                    visibleItems += 3;
+                    displayImages();
                 });
-            })
-            .catch(error => console.error('Error loading works:', error));
+
+                displayImages();
+
+            } catch (error) {
+                console.error('Error loading gallery images:', error);
+            }
+        }
+
+        // Fetch and display works
+        async function fetchWorks() {
+            try {
+                // In a real scenario, you would fetch from works.json
+                // const response = await fetch('works.json');
+                // const works = await response.json();
+                
+                // Mock data for demonstration
+                const works = [
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?web,design",
+                        "title": "โปรเจกต์เว็บไซต์",
+                        "category": "การพัฒนาเว็บ",
+                        "description": "เว็บไซต์ที่ฉันพัฒนาขึ้นสำหรับลูกค้า",
+                        "link": "#"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?app,mobile",
+                        "title": "แอปพลิเคชันมือถือ",
+                        "category": "การพัฒนาแอป",
+                        "description": "แอปพลิเคชันที่ฉันสร้างขึ้นสำหรับระบบ iOS และ Android",
+                        "link": "#"
+                    },
+                    {
+                        "image": "https://source.unsplash.com/random/600x400/?graphic,design",
+                        "title": "งานออกแบบกราฟิก",
+                        "category": "ออกแบบ",
+                        "description": "ผลงานออกแบบโลโก้และแบรนด์ต่างๆ",
+                        "link": "#"
+                    }
+                ];
+
+                const worksGrid = document.getElementById('works-grid');
+
+                works.forEach((work, index) => {
+                    const workCard = document.createElement('div');
+                    workCard.className = `work-card fade-in delay-${index % 3}`;
+                    workCard.innerHTML = `
+                        <img src="${work.image}" alt="${work.title}">
+                        <div class="work-card-content">
+                            <h3>${work.title}</h3>
+                            <span class="work-category">${work.category}</span>
+                            <p>${work.description}</p>
+                            <a href="${work.link}" class="work-link">ดูผลงาน <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    `;
+                    worksGrid.appendChild(workCard);
+                });
+
+            } catch (error) {
+                console.error('Error loading works:', error);
+            }
+        }
+
+        // Initialize all data fetching
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchSlides();
+            fetchGalleryImages();
+            fetchWorks();
+
+            // Add animation on scroll
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.fade-in');
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        });
     </script>
 </body>
 </html>
